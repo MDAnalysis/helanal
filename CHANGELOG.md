@@ -23,12 +23,13 @@ The rules for this file:
 
 ### Added
 <!-- New added features -->
+Core functionality, tests and documentation were implemented
+using the code from `MDAnalysis.analysis.helix_analysis`
 
 ### Fixed
 <!-- Bug fixes -->
 
 ### Changed
-Move helanal from MDAnalysis.analysis.helanal to standalone MDAKit
 
 ### Deprecated
 <!-- Soon-to-be removed features -->
