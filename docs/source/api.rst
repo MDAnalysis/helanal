@@ -1,8 +1,4 @@
 API Documentation
 =================
 
-.. autosummary::
-   :toctree: autosummary
-   :recursive:
-
-   helanal
+.. automodule:: helanal.helanal
