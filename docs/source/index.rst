@@ -27,10 +27,11 @@ bending angles between successive local helix axes.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    getting_started
+   example
    api
 
 
