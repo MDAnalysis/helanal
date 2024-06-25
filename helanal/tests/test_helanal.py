@@ -8,6 +8,7 @@ import helanal as hel
 import pytest
 import re
 import numpy as np
+import sys
 from numpy.testing import assert_equal, assert_almost_equal, assert_allclose
 
 import MDAnalysis as mda
@@ -16,7 +17,6 @@ from MDAnalysisTests.datafiles import (GRO, XTC, PSF, DCD, PDB_small,
                                        HELANAL_BENDING_MATRIX_SUBSET,
                                        XYZ)
 
-import sys
 def test_helanal_imported():
     """Sample test, will always pass so long as import statement worked"""
     assert "helanal" in sys.modules
@@ -54,7 +54,6 @@ HELANAL_SINGLE_DATA = {
 
 def read_bending_matrix(fn):
     """Read helanal_bending_matrix.dat into dict of numpy arrays.
-
     This is a quick and dirty parser with no error checking.
 
     Format::
