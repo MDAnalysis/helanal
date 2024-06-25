@@ -19,7 +19,7 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
-<!-- GitHub usernames of contributors to this release -->
+- @fiona-naughton
 
 ### Added
 <!-- New added features -->
@@ -28,7 +28,7 @@ The rules for this file:
 <!-- Bug fixes -->
 
 ### Changed
-<!-- Changes in existing functionality -->
+Move helanal from MDAnalysis.analysis.helanal to standalone MDAKit
 
 ### Deprecated
 <!-- Soon-to-be removed features -->
