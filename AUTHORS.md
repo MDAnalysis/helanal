@@ -1,6 +1,8 @@
 # Authors
 
-helanal was created by Your name (or your organization/company/team) in 2024.
+helanal was created by @fiona-naughton in 2024 from the 
+MDAnalysis.analysis.helanal module by Lily Wang, based on the 
+original MDAnalysis.analysis.helanal.
 
 
 All contributing authors are listed in this file below.
@@ -21,3 +23,11 @@ The rules for this file:
 
 **2024**
 - Your name (or your organization/company/team) <@fiona-naughton>
+
+**2020**
+- Lily Wang
+
+**Older**
+- Benjamin Hall
+- Oliver Beckstein
+- Xavier Deupi
