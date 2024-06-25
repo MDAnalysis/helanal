@@ -1,8 +1,8 @@
 # Authors
 
-helanal was created by @fiona-naughton in 2024 from the 
-MDAnalysis.analysis.helanal module by Lily Wang, based on the 
-original MDAnalysis.analysis.helanal.
+The helanal MDAKit was created by Fiona Naughton in 2024 from the 
+MDAnalysis.analysis.helix_analysis module by Lily Wang, in turn 
+based on the original helanal module, writen by Ben Hall.
 
 
 All contributing authors are listed in this file below.
@@ -21,13 +21,32 @@ The rules for this file:
   * Don't ever delete anything
 -->
 
-**2024**
-- Your name (or your organization/company/team) <@fiona-naughton>
+**2011**
+- Ben Hall
+- Oliver Beckstein <@orbeckst>
+
+**2012**
+- Sebastien Buchoux <@seb-buch>
+
+**2013**
+- Daniel Parton <@danielparton>
+- Xavier Duepi <@xdeupi>
+
+**2014**
+- Tyler Reddy <@tylerjereddy>
+
+**2015**
+- David Dotson <@dotsdl>
 
 **2020**
-- Lily Wang
+- Lily Wang <@lilyminium>
+- Philip Loche <@PicoCentauri>
 
-**Older**
-- Benjamin Hall
-- Oliver Beckstein
-- Xavier Deupi
+**2021**
+- Estephania Barreto-Ojeda 
+
+**2022**
+- <@robotjellyzone>
+
+**2024**
+- Fiona Naughton <@fiona-naughton>
