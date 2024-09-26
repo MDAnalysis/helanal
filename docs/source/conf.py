@@ -54,7 +54,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.extlinks",
     "mdanalysis_sphinx_theme",
-    "nbsphinx",
 ]
 
 autosummary_generate = True
