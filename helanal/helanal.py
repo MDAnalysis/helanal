@@ -249,9 +249,11 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
 
     # get origins by subtracting radius from atom i+1
     origins = positions[1:-1].copy()  # (n_res-2, 3)
-    origins[:-1] -= (radii*local_helix_directions[:-1].T).T
+    #origins[:-1] -= (radii*local_helix_directions[:-1].T).T
+    origins[:-1] = origins[:-1] - (radii*local_helix_directions[:-1].T).T
     # subtract radius from atom i+2 in last one
-    origins[-1] -= radii[-1]*local_helix_directions[-1]
+    #origins[-1] -= radii[-1]*local_helix_directions[-1]
+    origins[-1] = origins[-1] - radii[-1]*local_helix_directions[-1]
 
     helix_axes = vector_of_best_fit(origins)
     screw = local_screw_angles(helix_axes, np.asarray(ref_axis),
