@@ -153,11 +153,11 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
 
     #          ^               ^
     #           \             / bi
-    #            \           /
+    #            \    Vi+1   /
     #         CA_i+2 <----- CA_i+1
     #         /    \       /   ^
-    #        /    r \     /     \
-    #     V /        \ θ /       \
+    #        /    r \     /     \Vi
+    #   Vi+2/        \ θ /       \
     #      /          \ /       CA_i
     #     v           origin
     #   CA_i+3
@@ -165,6 +165,8 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     # V: vectors
     # bi: approximate "bisectors" in plane of screen
     #     Note: not real bisectors, as the vectors aren't normalised
+    #           but assuming ~equal spacing of CA atoms, i.e. |Vi| ~ |Vi+1|
+    #           should be approximately true.
     # θ: local_twists
     # origin: origins
     # local_axes: perpendicular to plane of screen. Orthogonal to "bisectors"
@@ -173,6 +175,7 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     bisectors = vectors[:-1] - vectors[1:]  # (n_res-2, 3)
     bimags = mdamath.pnorm(bisectors)  # (n_res-2,)
     adjacent_mag = bimags[:-1] * bimags[1:]  # (n_res-3,)
+    local_helix_directions = (bisectors.T/bimags).T  # (n_res-2, 3)
 
     # find angle between bisectors for twist and n_residue/turn
     cos_theta = mdamath.pdot(bisectors[:-1], bisectors[1:])/adjacent_mag
@@ -197,21 +200,38 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     local_bends = np.diagonal(bend_matrix, offset=3)  # (n_res-6,)
 
     # radius of local cylinder
+    ## This appears to be calculated based on the following.
+    ##
+    ##            CA_i+2                     CA_i+1
+    ##         r  / | \                      / ^
+    ##          /   |  \Vi+1                /   \
+    ##        / θ   |   \                  / bi  \
+    ## origin-----------CA_i+1             ----->CA_i+1      
+    ##           x  | y /                  \     ^  
+    ##              |  /Vi                  \   /    
+    ##              | /                      \ /
+    ##             CA_i                     CA_i 
+    ##
+    ## If we assume atoms are ~evenly spaced around a circle, bi are ~bisectors 
+    ##   and their projections should meet at the centre of the circle
+    ##   i.e. r ~= x + y
+    ## bi = Vi-Vi+1 is the digonal of a parallelogram formed by Vi and Vi+1.
+    ##   A vector from CAi to CAi+2 is the other diangonal, so is perpendular
+    ##   to and bisects bi - i.e. x = rcos0 and y = |bi|/2
+    ## Solve for r and substitute |bi| -> adjacent_mag**0.5 to take into account 
+    ##   some difference.
     radii = (adjacent_mag**0.5) / (2*(1.0-cos_theta))  # (n_res-3,)
+
     # special case: angle b/w bisectors is 0 (should virtually never happen)
     # guesstimate radius = half bisector magnitude
     radii = np.where(cos_theta != 1, radii, (adjacent_mag**0.5)/2)
     # height of local cylinder
     heights = np.abs(mdamath.pdot(vectors[1:-1], local_axes))  # (n_res-3,)
 
-    local_helix_directions = (bisectors.T/bimags).T  # (n_res-2, 3)
-
     # get origins by subtracting radius from atom i+1
     origins = positions[1:-1].copy()  # (n_res-2, 3)
-    #origins[:-1] -= (radii*local_helix_directions[:-1].T).T
     origins[:-1] = origins[:-1] - (radii*local_helix_directions[:-1].T).T
     # subtract radius from atom i+2 in last one
-    #origins[-1] -= radii[-1]*local_helix_directions[-1]
     origins[-1] = origins[-1] - radii[-1]*local_helix_directions[-1]
 
     helix_axes = vector_of_best_fit(origins)
