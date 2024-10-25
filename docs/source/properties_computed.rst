@@ -77,8 +77,8 @@ All angles are in degrees.
      - :math:`n_{frames}` * :math:`n_{res}`-3
    * - ``local_bends``: the angle of bending of the helix between adjacent 
        4-atom windows, i.e. the angle :math:`β` between the `local_axes` 
-       :math:`\mathfb{A_i}` (of atoms :math:`c_i,c_{i+1},c_{i+2},c_{i+3}`) and 
-       :math:`\mathfb{A_(i+3)` (of atoms 
+       :math:`\mathbf{A_i}` (of atoms :math:`c_i,c_{i+1},c_{i+2},c_{i+3}`) and 
+       :math:`\mathbf{A_{i+3}` (of atoms 
        :math:`c_{i+3},c_{i+4},c_{i+5},c_{i+6}`).
      - .. image:: images/bends.svg
           :width: 100%
