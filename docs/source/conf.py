@@ -28,7 +28,7 @@ copyright = (
     "Project structure based on the "
     "MDAnalysis Cookiecutter version 0.1"
 )
-author = "Fiona Naugton"
+author = "Fiona Naughton"
 
 # The short X.Y version
 version = ""

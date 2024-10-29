@@ -3,7 +3,7 @@ Computed Properties
 
 Helanal follows the procedure of Sugeta and Miyazawa [Sugeta1967]_. Properties
 are computed for a 'window' of four consecutive :math:`C_α` atoms, and this 
-window then slid along the length of the helix in one-residue steps.
+window is then slid along the length of the helix in one-residue steps.
 
 For each window consisting of atoms :math:`c_i`, :math:`c_{i+1}`, 
 :math:`c_{i+2}`, :math:`c_{i+3}`, the vectors :math:`\mathbf{B_1}`, 
