@@ -22,7 +22,7 @@ For this example, we will use datafiles from the MDAnalysis tests::
     from MDAnalysis.tests.datafiles import PSF, DCD
     u = mda.Universe(PSF, DCD)
 
-To analyse a single helix, pass a selection with one atom per reside 
+To analyse a single helix, pass a selection with one atom per residue 
 (normally this will be the Cα atoms)::
 
     hel = helanal.HELANAL(u, select='name CA and resnum 161-187')
