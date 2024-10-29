@@ -41,7 +41,7 @@ Further Options
 ---------------
 
 - The **simulation frames** over which analysis is performed can be specified 
-  using ``start``, ``stop``, and/or ``step``; or by providing a list 
+  using ``start``, ``stop``, and/or ``step``, or by providing a list 
   ``frames`` with which to slice the trajectory:: 
 
     hel.run(start=5, step=10)
