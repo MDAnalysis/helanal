@@ -202,7 +202,7 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     # radius of local cylinder
     ## This appears to be calculated based on the following.
     ##
-    ##            CA_i+2                     CA_i+1
+    ##            CA_i+2                     CA_i+2
     ##         r  / | \                      / ^
     ##          /   |  \Vi+1                /   \
     ##        / θ   |   \                  / bi  \
