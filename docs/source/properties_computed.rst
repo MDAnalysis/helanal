@@ -1,9 +1,10 @@
 Computed Properties
 ===================
 
-Helanal follows the procedure of Sugeta and Miyazawa [Sugeta1967]_. Properties
-are computed for a 'window' of four consecutive :math:`C_α` atoms, and this 
-window is then slid along the length of the helix in one-residue steps.
+Helanal follows the procedure of Sugeta and Miyazawa [Sugeta1967]_ and is based
+on the `Fortran HELANAL implementation`_ by [Bansal2000]_. 
+Properties are computed for a 'window' of four consecutive :math:`C_α` atoms, 
+and this window is then slid along the length of the helix in one-residue steps.
 
 For each window consisting of atoms :math:`c_i`, :math:`c_{i+1}`, 
 :math:`c_{i+2}`, :math:`c_{i+3}`, the vectors :math:`\mathbf{B_1}`, 
@@ -111,3 +112,6 @@ All angles are in degrees.
 
 A summary of the results, including mean, sample standard deviation and mean 
 absolute deviation is also provided in ``results.summary``.
+
+.. _`Fortran HELANAL implementation`:
+   https://web.archive.org/web/20090226192455/http://www.ccrnp.ncifcrf.gov/users/kumarsan/HELANAL/helanal.f

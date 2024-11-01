@@ -82,7 +82,7 @@ Further Options
 Citations
 ---------
 
-helanal implements the HELANAL algorithm from  [Bansal2000]_, which itself
+helanal is based on the `HELANAL algorithm`_ from  [Bansal2000]_, which itself
 uses the method of [Sugeta1967]_ to characterise each local axis. Please cite 
 them when using this module in published work.
 
@@ -94,3 +94,5 @@ them when using this module in published work.
    HELANAL - A program to characterise helix geometry in proteins.
    *J Biomol Struct Dyn.*  17(5):811-819.
 
+.. _`HELANAL algorithm`:
+   https://web.archive.org/web/20090226192455/http://www.ccrnp.ncifcrf.gov/users/kumarsan/HELANAL/helanal.f
