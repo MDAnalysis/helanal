@@ -23,16 +23,23 @@ The rules for this file:
 
 ### Added
 <!-- New added features -->
-Core functionality, tests and documentation were implemented
+* Core functionality, tests and documentation were implemented
 using the code from `MDAnalysis.analysis.helix_analysis`
 
 ### Fixed
 <!-- Bug fixes -->
 
 ### Changed
+* Overhaul of documentation 
 
 ### Deprecated
 <!-- Soon-to-be removed features -->
 
 ### Removed
 <!-- Removed features -->
+
+## Prior to relocation as MDAKit
+helanal was created from existing code in the MDAnalysis core library. 
+Changes made to this code prior its transfer to stand-alone MDAKit can
+be found in the CHANGELOG for [MDAnalysis](https://github.com/MDAnalysis/mdanalysis/blob/develop/package/CHANGELOG). 
+
