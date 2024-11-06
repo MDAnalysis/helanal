@@ -24,11 +24,11 @@ import helanal  # noqa
 
 project = "helanal"
 copyright = (
-    "2024, Your name (or your organization/company/team). "
+    "2024, Fiona Naughton. "
     "Project structure based on the "
     "MDAnalysis Cookiecutter version 0.1"
 )
-author = "Your name (or your organization/company/team)"
+author = "Fiona Naughton"
 
 # The short X.Y version
 version = ""

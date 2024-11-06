@@ -22,47 +22,6 @@
 # J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787
 #
 
-"""
-HELANAL --- analysis of protein helices
-=======================================
-
-This module contains code to analyse protein helices using the
-HELANAL_ algorithm
-([Bansal2000]_ , [Sugeta1967]_ ).
-
-HELANAL_ quantifies the geometry of helices in proteins on the basis of their
-Cα atoms. It can determine local structural features such as the local
-helical twist and rise, virtual torsion angle, local helix origins and
-bending angles between successive local helix axes.
-
-.. _HELANAL: https://pubmed.ncbi.nlm.nih.gov/10798526/
-
-.. [Sugeta1967] Sugeta, H. and Miyazawa, T. 1967. General method for
-   calculating helical parameters of polymer chains from bond lengths, bond
-   angles and internal rotation angles. *Biopolymers* 5 673 - 679
-
-.. [Bansal2000] Bansal M, Kumar S, Velavan R. 2000.
-   HELANAL - A program to characterise helix geometry in proteins.
-   *J Biomol Struct Dyn.*  17(5):811-819.
-
-
-Classes
--------
-
-.. autoclass:: HELANAL
-
-
-Functions
----------
-
-.. autofunction:: helix_analysis
-
-.. autofunction:: vector_of_best_fit
-
-.. autofunction:: local_screw_angles
-
-"""
-
 import warnings
 import numpy as np
 
@@ -194,11 +153,11 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
 
     #          ^               ^
     #           \             / bi
-    #            \           /
+    #            \    Vi+1   /
     #         CA_i+2 <----- CA_i+1
     #         /    \       /   ^
-    #        /    r \     /     \
-    #     V /        \ θ /       \
+    #        /    r \     /     \Vi
+    #   Vi+2/        \ θ /       \
     #      /          \ /       CA_i
     #     v           origin
     #   CA_i+3
@@ -206,6 +165,8 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     # V: vectors
     # bi: approximate "bisectors" in plane of screen
     #     Note: not real bisectors, as the vectors aren't normalised
+    #           but assuming ~equal spacing of CA atoms, i.e. |Vi| ~ |Vi+1|
+    #           should be approximately true.
     # θ: local_twists
     # origin: origins
     # local_axes: perpendicular to plane of screen. Orthogonal to "bisectors"
@@ -214,6 +175,7 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     bisectors = vectors[:-1] - vectors[1:]  # (n_res-2, 3)
     bimags = mdamath.pnorm(bisectors)  # (n_res-2,)
     adjacent_mag = bimags[:-1] * bimags[1:]  # (n_res-3,)
+    local_helix_directions = (bisectors.T/bimags).T  # (n_res-2, 3)
 
     # find angle between bisectors for twist and n_residue/turn
     cos_theta = mdamath.pdot(bisectors[:-1], bisectors[1:])/adjacent_mag
@@ -238,18 +200,37 @@ def helix_analysis(positions, ref_axis=[0, 0, 1]):
     local_bends = np.diagonal(bend_matrix, offset=3)  # (n_res-6,)
 
     # radius of local cylinder
+    ## This appears to be calculated based on the following.
+    ##
+    ##            CA_i+2                     CA_i+2
+    ##         r  / | \                      / ^
+    ##          /   |  \Vi+1                /   \
+    ##        / θ   |   \                  / bi  \
+    ## origin-----------CA_i+1             ----->CA_i+1      
+    ##           x  | y /                  \     ^  
+    ##              |  /Vi                  \   /    
+    ##              | /                      \ /
+    ##             CA_i                     CA_i 
+    ##
+    ## If we assume atoms are ~evenly spaced around a circle, bi are ~bisectors 
+    ##   and their projections should meet at the centre of the circle
+    ##   i.e. r ~= x + y
+    ## bi = Vi-Vi+1 is the digonal of a parallelogram formed by Vi and Vi+1.
+    ##   A vector from CAi to CAi+2 is the other diangonal, so is perpendular
+    ##   to and bisects bi - i.e. x = rcos0 and y = |bi|/2
+    ## Solve for r and substitute |bi| -> adjacent_mag**0.5 to take into account 
+    ##   some difference.
     radii = (adjacent_mag**0.5) / (2*(1.0-cos_theta))  # (n_res-3,)
+
     # special case: angle b/w bisectors is 0 (should virtually never happen)
     # guesstimate radius = half bisector magnitude
     radii = np.where(cos_theta != 1, radii, (adjacent_mag**0.5)/2)
     # height of local cylinder
     heights = np.abs(mdamath.pdot(vectors[1:-1], local_axes))  # (n_res-3,)
 
-    local_helix_directions = (bisectors.T/bimags).T  # (n_res-2, 3)
-
     # get origins by subtracting radius from atom i+1
     origins = positions[1:-1].copy()  # (n_res-2, 3)
-    origins[:-1] -= (radii*local_helix_directions[:-1].T).T
+    origins[:-1] -= radii[:,None]*local_helix_directions[:-1]
     # subtract radius from atom i+2 in last one
     origins[-1] -= radii[-1]*local_helix_directions[-1]
 
