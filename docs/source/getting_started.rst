@@ -3,7 +3,24 @@ Getting Started
 
 Installation
 ------------
-*TBA*
+Using PyPI
+~~~~~~~~~~
+The latest version of helanal can be installed from PyPI with:
+
+.. code-block:: bash
+
+    pip install helanal
+
+
+From source
+~~~~~~~~~~~
+To install the current (non-release) version of helanal, you can install the
+package from source:
+
+.. code-block:: bash
+
+    pip install git+https://github.com/MDAnalysis/helanal@main
+
 
 
 Basic Usage
