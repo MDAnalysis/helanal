@@ -16,7 +16,7 @@ maintainers = [
     {name = "Your name (or your organization/company/team)", email = "fiona@mdanalysis.org"},
 ]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "MDAnalysis>=2.0.0",
 ]
