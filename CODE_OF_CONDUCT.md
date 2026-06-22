@@ -1,5 +1,5 @@
 The MDAnalysis *Code of Conduct* sets the rules for the behavior of
-every member in the MDAnalysis community, including in the mdahole2 community, so that everyone can
+every member in the MDAnalysis community, including in the helanal community, so that everyone can
 experience a welcoming, supportive, and productive environment that is
 free from harassment. As a [NumFOCUS][NF] sponsored
 project, MDAnalysis follows the [NumFOCUS Code of Conduct][NF-conduct].
