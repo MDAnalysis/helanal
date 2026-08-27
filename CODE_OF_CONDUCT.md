@@ -1,3 +1,7 @@
+# Code of conduct
+
+Helanal adopts the MDAnalysis *Code of Conduct*.
+
 The MDAnalysis *Code of Conduct* sets the rules for the behavior of
 every member in the MDAnalysis community, including in the helanal community, so that everyone can
 experience a welcoming, supportive, and productive environment that is
